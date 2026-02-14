@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day ❤️</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        /* Music Control Button */
+        .music-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #e91e63;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.3s;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .music-control:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 20px rgba(233, 30, 99, 0.4);
+        }
+
+        .music-control.playing {
+            animation: musicPulse 1s infinite;
+        }
+
+        @keyframes musicPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Animated background hearts */
+        .heart-bg {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            opacity: 0.3;
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) rotate(0deg);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.3;
+            }
+            90% {
+                opacity: 0.3;
+            }
+            100% {
+                transform: translateY(-100px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Main container */
+        .main-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .content-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 30px;
+            padding: 50px;
+            max-width: 900px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .content-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 182, 193, 0.3) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .content-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        h1 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #e91e63;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+
+        /* Game Section */
+        .game-container {
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe5f0 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+        }
+
+        .game-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #e91e63;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .game-description {
+            text-align: center;
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        #gameCanvas {
+            display: block;
+            margin: 0 auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            max-width: 100%;
+        }
+
+        .score-board {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .score-item {
+            text-align: center;
+        }
+
+        .score-label {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .score-value {
+            font-size: 1.8rem;
+            color: #e91e63;
+        }
+
+        .btn-custom {
+            background: linear-gradient(135deg, #e91e63 0%, #c2185b 100%);
+            border: none;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin: 10px 5px;
+        }
+
+        .btn-custom:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(233, 30, 99, 0.4);
+            color: white;
+        }
+
+        .message-section {
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe5ec 100%);
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .love-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            color: #e91e63;
+            line-height: 1.8;
+            margin: 20px 0;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        .game-over-overlay {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            z-index: 10;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .game-over-overlay h3 {
+            color: #e91e63;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        /* Love Letter Section */
+        .love-letter-section {
+            background: linear-gradient(135deg, #fff9fb 0%, #fff0f5 100%);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 30px;
+            box-shadow: inset 0 2px 10px rgba(233, 30, 99, 0.1);
+            position: relative;
+            border: 2px solid rgba(233, 30, 99, 0.2);
+        }
+
+        .love-letter-section::before {
+            content: '💌';
+            position: absolute;
+            top: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 3rem;
+            background: white;
+            padding: 0 15px;
+            border-radius: 50%;
+        }
+
+        .letter-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #e91e63;
+            text-align: center;
+            margin-bottom: 30px;
+            margin-top: 20px;
+        }
+
+        .letter-content {
+            font-size: 1.1rem;
+            line-height: 2;
+            color: #333;
+            text-align: justify;
+            margin-bottom: 20px;
+        }
+
+        .letter-content p {
+            margin-bottom: 20px;
+            text-indent: 30px;
+        }
+
+        .letter-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: #e91e63;
+            text-align: right;
+            margin-top: 30px;
+        }
+
+        .letter-date {
+            text-align: right;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .envelope-seal {
+            text-align: center;
+            font-size: 2rem;
+            margin-top: 20px;
+            animation: pulse 2s infinite;
+        }
+
+        /* Whack-a-Cupid Game Styles */
+        .whack-game-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            max-width: 600px;
+            margin: 20px auto;
+        }
+
+        .whack-hole {
+            background: linear-gradient(135deg, #ffb3d9 0%, #ff80bf 100%);
+            border-radius: 50%;
+            height: 120px;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            box-shadow: inset 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: transform 0.1s;
+        }
+
+        .whack-hole:active {
+            transform: scale(0.95);
+        }
+
+        .whack-cupid {
+            position: absolute;
+            bottom: -100%;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 60px;
+            transition: bottom 0.3s;
+            cursor: pointer;
+        }
+
+        .whack-cupid.up {
+            bottom: 20%;
+        }
+
+        .whack-cupid.hit {
+            animation: whackHit 0.3s;
+        }
+
+        @keyframes whackHit {
+            0%, 100% { transform: translateX(-50%) rotate(0deg); }
+            25% { transform: translateX(-50%) rotate(-15deg); }
+            75% { transform: translateX(-50%) rotate(15deg); }
+        }
+
+        .whack-timer {
+            font-size: 2rem;
+            color: #e91e63;
+            text-align: center;
+            margin: 15px 0;
+            font-weight: bold;
+        }
+
+        /* Mobile Optimization for Redmi Note 10 Pro and similar devices */
+        @media (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .music-control {
+                width: 50px;
+                height: 50px;
+                top: 15px;
+                right: 15px;
+                font-size: 20px;
+            }
+
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            .content-card {
+                padding: 25px 15px;
+                border-radius: 20px;
+                margin: 10px;
+            }
+
+            #gameCanvas {
+                width: 100% !important;
+                height: auto !important;
+                max-width: 100%;
+            }
+
+            .game-container {
+                padding: 20px 15px;
+            }
+
+            .game-title {
+                font-size: 1.5rem;
+            }
+
+            .game-description {
+                font-size: 0.9rem;
+            }
+
+            .score-board {
+                flex-wrap: wrap;
+                font-size: 1rem;
+            }
+
+            .score-item {
+                margin: 5px 10px;
+            }
+
+            .score-value {
+                font-size: 1.4rem;
+            }
+
+            .btn-custom {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+                margin: 5px 3px;
+            }
+
+            .message-section {
+                padding: 20px 15px;
+            }
+
+            .love-message {
+                font-size: 1.2rem;
+            }
+
+            .love-letter-section {
+                padding: 25px 20px;
+                margin-top: 20px;
+            }
+
+            .letter-title {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+            }
+
+            .letter-content {
+                font-size: 1rem;
+                line-height: 1.8;
+            }
+
+            .letter-content p {
+                text-indent: 20px;
+                margin-bottom: 15px;
+            }
+
+            .letter-signature {
+                font-size: 1.5rem;
+                margin-top: 20px;
+            }
+
+            .game-over-overlay {
+                padding: 20px;
+                width: 90%;
+            }
+
+            .game-over-overlay h3 {
+                font-size: 1.5rem;
+            }
+
+            .whack-hole {
+                height: 90px;
+            }
+
+            .whack-cupid {
+                font-size: 45px;
+            }
+
+            .whack-game-grid {
+                gap: 10px;
+            }
+        }
+
+        /* Extra small devices optimization */
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+            }
+
+            .content-card {
+                padding: 20px 12px;
+            }
+
+            .heart {
+                font-size: 20px;
+            }
+
+            .whack-hole {
+                height: 70px;
+            }
+
+            .whack-cupid {
+                font-size: 35px;
+            }
+        }
+
+        /* Landscape mode optimization for mobile */
+        @media (max-width: 768px) and (orientation: landscape) {
+            .main-container {
+                padding: 10px;
+            }
+
+            .content-card {
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+        }
+
+        /* Touch optimization */
+        @media (hover: none) and (pointer: coarse) {
+            .btn-custom {
+                padding: 12px 25px;
+                min-height: 44px;
+            }
+
+            canvas {
+                touch-action: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="heart-bg" id="heartBg"></div>
+    
+    <!-- Music Control -->
+    <div class="music-control" id="musicControl" onclick="toggleMusic()">
+        🎵
+    </div>
+    
+    <!-- Background Music -->
+<audio id="bgMusic" loop autoplay>
+    <source src="every-breath.mp3" type="audio/mpeg">
+</audio>
+
+    
+    <div class="main-container">
+        <div class="content-card">
+            <div class="content-inner">
+                <h1 class="pulse">💕 Happy Valentine's Day 💕<br>AMAR JAAN!  </h1>
+                <p class="subtitle">A special surprise just for you... my bouuuuuu💕</p>
+
+                <div class="message-section">
+                    <p class="love-message">
+                        "In a world full of temporary things,<br>
+                        you are a perpetual feeling."
+                    </p>
+                    <p style="color: #666; font-style: italic;">
+                        Every moment with you is a treasure. Today, I've created something special just for you!
+                    </p>
+                </div>
+
+                <div class="love-letter-section">
+                    <h2 class="letter-title">My Dearest Love</h2>
+                    
+                    <div class="letter-content">
+                        <p>
+Niha,<br>
+Amar jaan,
+</p>
+
+<p>
+Ei bikele chupchap boshe achi… ar shudhu tomar kothai chinta kortesi. Mone hocche shob kichu thama, shudhu tumi ar tomar smriti ghure beracche amar chaarpashe. Jodi ei muhurte tumi amar pashe thakte… amra eksathe boshe golpo kortam, haat dhore ektu haathtam, akash ta dekhtam… koto shundor hoto shobkichu!
+</p>
+
+<p>
+Niha, amar protita sokal shuru hoy tomake diye. Ghum theke uthe prothom jei nam ta mone ashe, sheta tomar. Ei koyekta din dure thaka amar jonne koto ta koshto, seta ami kothay bujhate parbo na. Sokale uthe video call na pele mone hoy din ta incomplete. At least tomar voice ta shunar jonne literally ami pagol hoye jai.
+</p>
+
+<p>
+Niha, ami chai amra ekta successful couple hobo. Tomar namer pashe amar nam thakbe. Ami chai tomar biggest supporter, tomar shobcheye boro cheerleader. Ami prochur imagine kori tumi office theke ber hoccho, ami tomake niye ashchi, rastay dariye ekta ice cream kinchi… tumi bacchar moto kore khaccho, ar ami shudhu takiye takiye dekhchi ar haschi. Ei choto choto moment gulo amar kache puro duniya. 
+</p>
+
+<p>
+Onek shomoy emon kichu moment ashe jokhon mone hoy, "issh, Niha jodi ekhane thakto!" Protita second e ami tomake feel kori. Amar every plan, prottekta swapno te tumi acho. Amar bhobisshot er chinta korle shudhu tomakei dekhi amar pashe. 
+</p>
+
+<p>
+Niha, tumi amar khub khub khub apon manush jaan. Ami chai jiboner shesh din porjonto emon korei tomake bhalobashte. Tomar haat dhore cholte, tomake protect korte, tomake niye gorbo korte. 
+</p>
+
+<p>
+Insha Allah amra eksathe shob joy korbo.  Shob koshto, shob challenge, shob shukhshob kichu eksathe share korbo. Tension niyo na,pera niyo na aareh babah! Tomar Kammya ache na!
+</p>
+
+<p>
+Niha…<br>
+I love you so much, amar jaan.
+</p>
+                    </div>
+                    
+                    <div class="letter-signature">
+                        Tomar jaan,
+                        KAMMYA💕
+                    </div>
+                    
+                    <div class="letter-date">
+                        Valentine's Day, February 14, 2026
+                    </div>
+                    
+                    <div class="envelope-seal">
+                        💝
+                    </div>
+                </div>
+
+                <div class="game-container">
+                    <h2 class="game-title">💘 Catch The Hearts Game 💘</h2>
+                    <p class="game-description">
+                        Catch the falling hearts and avoid the broken ones! Each heart you catch represents a reason why I love you. 💗
+                    </p>
+                    
+                    <div style="position: relative;">
+                        <canvas id="gameCanvas" width="600" height="400"></canvas>
+                        <div class="game-over-overlay" id="gameOverOverlay">
+                            <h3>Game Over!</h3>
+                            <p style="font-size: 1.2rem; color: #666;">You caught <span id="finalScore">0</span> hearts!</p>
+                            <p style="color: #e91e63; margin: 15px 0;">Every heart is a reason I love you! 💕</p>
+                            <button class="btn btn-custom" onclick="restartGame()">Play Again</button>
+                        </div>
+                    </div>
+
+                    <div class="score-board">
+                        <div class="score-item">
+                            <div class="score-label">Score</div>
+                            <div class="score-value" id="score">0</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">High Score</div>
+                            <div class="score-value" id="highScore">0</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Lives</div>
+                            <div class="score-value" id="lives">❤️❤️❤️</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button class="btn btn-custom" onclick="startGame()" id="startBtn">Start Game</button>
+                        <button class="btn btn-custom" onclick="pauseGame()" id="pauseBtn" style="display: none;">Pause</button>
+                    </div>
+                </div>
+
+                <!-- New Whack-a-Cupid Game -->
+                <div class="game-container">
+                    <h2 class="game-title">💘 Whack-a-Cupid Challenge 💘</h2>
+                    <p class="game-description">
+                        Cupid is playing hide and seek! Click on the cupids as fast as you can! 
+                        But watch out - some are sneaky! 😈
+                    </p>
+
+                    <div class="whack-timer" id="whackTimer">Time: 30s</div>
+
+                    <div class="score-board">
+                        <div class="score-item">
+                            <div class="score-label">Cupids Hit</div>
+                            <div class="score-value" id="whackScore">0</div>
+                        </div>
+                        <div class="score-item">
+                            <div class="score-label">Best Score</div>
+                            <div class="score-value" id="whackHighScore">0</div>
+                        </div>
+                    </div>
+
+                    <div class="whack-game-grid" id="whackGrid">
+                        <div class="whack-hole" data-hole="0">
+                            <div class="whack-cupid">💘</div>
+                        </div>
+                        <div class="whack-hole" data-hole="1">
+                            <div class="whack-cupid">💘</div>
+                        </div>
+                        <div class="whack-hole" data-hole="2">
+                            <div class="whack-cupid">💘</div>
+                        </div>
+                        <div class="whack-hole" data-hole="3">
+                            <div class="whack-cupid">💘</div>
+                        </div>
+                        <div class="whack-hole" data-hole="4">
+                            <div class="whack-cupid">💘</div>
+                        </div>
+                        <div class="whack-hole" data-hole="5">
+                            <div class="whack-cupid">💘</div>
+                        </div>
+                        <div class="whack-hole" data-hole="6">
+                            <div class="whack-cupid">💘</div>
+                        </div>
+                        <div class="whack-hole" data-hole="7">
+                            <div class="whack-cupid">💘</div>
+                        </div>
+                        <div class="whack-hole" data-hole="8">
+                            <div class="whack-cupid">💘</div>
+                        </div>
+                    </div>
+
+                    <div class="text-center mt-3">
+                        <button class="btn btn-custom" onclick="startWhackGame()" id="whackStartBtn">Start Challenge</button>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <p style="color: #666; font-size: 0.9rem;">
+                        Made with 💕 just for you on Valentine's Day 2026
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Background Music Control
+        const bgMusic = document.getElementById('bgMusic');
+        const musicControl = document.getElementById('musicControl');
+        let isMusicPlaying = false;
+
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                bgMusic.pause();
+                musicControl.textContent = '🎵';
+                musicControl.classList.remove('playing');
+            } else {
+                bgMusic.play().catch(e => console.log('Music play failed:', e));
+                musicControl.textContent = '🎶';
+                musicControl.classList.add('playing');
+            }
+            isMusicPlaying = !isMusicPlaying;
+        }
+
+        // Auto-play attempt (will work after user interaction)
+        document.addEventListener('click', function autoPlay() {
+            if (!isMusicPlaying) {
+                toggleMusic();
+            }
+            document.removeEventListener('click', autoPlay);
+        }, { once: true });
+
+        // Create floating hearts in background
+        function createFloatingHearts() {
+            const container = document.getElementById('heartBg');
+            const hearts = ['❤️', '💕', '💖', '💗', '💓', '💝'];
+            
+            setInterval(() => {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 10 + 10) + 's';
+                heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+                container.appendChild(heart);
+                
+                setTimeout(() => heart.remove(), 15000);
+            }, 2000);
+        }
+
+        createFloatingHearts();
+
+        // ===== CATCH THE HEARTS GAME =====
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        let gameRunning = false;
+        let gamePaused = false;
+        let score = 0;
+        let highScore = localStorage.getItem('valentineHighScore') || 0;
+        let lives = 3;
+        let fallingObjects = [];
+        let basket = {
+            x: canvas.width / 2 - 40,
+            y: canvas.height - 60,
+            width: 80,
+            height: 60,
+            speed: 8
+        };
+
+        document.getElementById('highScore').textContent = highScore;
+
+        // Keyboard and mouse controls
+        let keys = {};
+        document.addEventListener('keydown', (e) => {
+            keys[e.key] = true;
+        });
+        document.addEventListener('keyup', (e) => {
+            keys[e.key] = false;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!gameRunning || gamePaused) return;
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            basket.x = (e.clientX - rect.left) * scaleX - basket.width / 2;
+        });
+
+        canvas.addEventListener('touchmove', (e) => {
+            if (!gameRunning || gamePaused) return;
+            e.preventDefault();
+            const rect = canvas.getBoundingClientRect();
+            const scaleX = canvas.width / rect.width;
+            basket.x = (e.touches[0].clientX - rect.left) * scaleX - basket.width / 2;
+        }, { passive: false });
+
+        canvas.addEventListener('touchstart', (e) => {
+            if (!gameRunning || gamePaused) return;
+            e.preventDefault();
+        }, { passive: false });
+
+        function startGame() {
+            gameRunning = true;
+            gamePaused = false;
+            score = 0;
+            lives = 3;
+            fallingObjects = [];
+            basket.x = canvas.width / 2 - 40;
+            document.getElementById('gameOverOverlay').style.display = 'none';
+            document.getElementById('startBtn').style.display = 'none';
+            document.getElementById('pauseBtn').style.display = 'inline-block';
+            updateScore();
+            gameLoop();
+        }
+
+        function pauseGame() {
+            gamePaused = !gamePaused;
+            document.getElementById('pauseBtn').textContent = gamePaused ? 'Resume' : 'Pause';
+            if (!gamePaused) gameLoop();
+        }
+
+        function restartGame() {
+            startGame();
+        }
+
+        function updateScore() {
+            document.getElementById('score').textContent = score;
+            document.getElementById('lives').textContent = '❤️'.repeat(lives);
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('valentineHighScore', highScore);
+                document.getElementById('highScore').textContent = highScore;
+            }
+        }
+
+        function createFallingObject() {
+            const isBroken = Math.random() < 0.25;
+            const objectSize = window.innerWidth <= 768 ? canvas.width * 0.08 : 40;
+            fallingObjects.push({
+                x: Math.random() * (canvas.width - objectSize),
+                y: -objectSize,
+                width: objectSize,
+                height: objectSize,
+                speed: (2 + Math.random() * 2 + (score / 50)) * (canvas.height / 400),
+                emoji: isBroken ? '💔' : (Math.random() < 0.8 ? '❤️' : '💝'),
+                isBroken: isBroken
+            });
+        }
+
+        function drawBasket() {
+            const fontSize = window.innerWidth <= 768 ? basket.width * 0.9 : 50;
+            ctx.font = `${fontSize}px Arial`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('🧺', basket.x + basket.width / 2, basket.y + basket.height / 2);
+        }
+
+        function drawFallingObjects() {
+            fallingObjects.forEach(obj => {
+                const fontSize = window.innerWidth <= 768 ? obj.width * 0.85 : 35;
+                ctx.font = `${fontSize}px Arial`;
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText(obj.emoji, obj.x + obj.width / 2, obj.y + obj.height / 2);
+            });
+        }
+
+        function updateGame() {
+            if (keys['ArrowLeft'] && basket.x > 0) {
+                basket.x -= basket.speed;
+            }
+            if (keys['ArrowRight'] && basket.x < canvas.width - basket.width) {
+                basket.x += basket.speed;
+            }
+
+            basket.x = Math.max(0, Math.min(canvas.width - basket.width, basket.x));
+
+            for (let i = fallingObjects.length - 1; i >= 0; i--) {
+                fallingObjects[i].y += fallingObjects[i].speed;
+
+                if (fallingObjects[i].y + fallingObjects[i].height > basket.y &&
+                    fallingObjects[i].y < basket.y + basket.height &&
+                    fallingObjects[i].x + fallingObjects[i].width > basket.x &&
+                    fallingObjects[i].x < basket.x + basket.width) {
+                    
+                    if (fallingObjects[i].isBroken) {
+                        lives--;
+                        updateScore();
+                        if (lives <= 0) {
+                            endGame();
+                        }
+                    } else {
+                        score += 10;
+                        updateScore();
+                    }
+                    fallingObjects.splice(i, 1);
+                }
+                else if (fallingObjects[i].y > canvas.height) {
+                    if (!fallingObjects[i].isBroken) {
+                        lives--;
+                        updateScore();
+                        if (lives <= 0) {
+                            endGame();
+                        }
+                    }
+                    fallingObjects.splice(i, 1);
+                }
+            }
+
+            if (Math.random() < 0.02 + (score / 10000)) {
+                createFallingObject();
+            }
+        }
+
+        function endGame() {
+            gameRunning = false;
+            document.getElementById('finalScore').textContent = score;
+            document.getElementById('gameOverOverlay').style.display = 'block';
+            document.getElementById('startBtn').style.display = 'inline-block';
+            document.getElementById('pauseBtn').style.display = 'none';
+        }
+
+        function gameLoop() {
+            if (!gameRunning || gamePaused) return;
+
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, '#ffe5f0');
+            gradient.addColorStop(1, '#ffc0d9');
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+            updateGame();
+            drawFallingObjects();
+            drawBasket();
+
+            requestAnimationFrame(gameLoop);
+        }
+
+        function resizeCanvas() {
+            const container = canvas.parentElement;
+            const containerWidth = container.clientWidth;
+            const maxWidth = Math.min(600, containerWidth - 20);
+            
+            if (window.innerWidth <= 768) {
+                const ratio = 400 / 600;
+                canvas.width = maxWidth;
+                canvas.height = maxWidth * ratio;
+                
+                basket.width = canvas.width * 0.13;
+                basket.height = basket.width * 0.75;
+                basket.x = canvas.width / 2 - basket.width / 2;
+                basket.y = canvas.height - basket.height - 10;
+            } else {
+                canvas.width = 600;
+                canvas.height = 400;
+                basket.width = 80;
+                basket.height = 60;
+                basket.x = canvas.width / 2 - 40;
+                basket.y = canvas.height - 60;
+            }
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('orientationchange', resizeCanvas);
+        resizeCanvas();
+
+        // ===== WHACK-A-CUPID GAME =====
+        let whackScore = 0;
+        let whackHighScore = localStorage.getItem('whackHighScore') || 0;
+        let whackGameRunning = false;
+        let whackTimeLeft = 30;
+        let whackInterval;
+        let whackTimerInterval;
+        const cupids = ['💘', '😈', '💝', '👼', '💕'];
+        
+        document.getElementById('whackHighScore').textContent = whackHighScore;
+
+        function randomHole() {
+            const holes = document.querySelectorAll('.whack-hole');
+            const randomIndex = Math.floor(Math.random() * holes.length);
+            return holes[randomIndex];
+        }
+
+        function popUp() {
+            if (!whackGameRunning) return;
+            
+            const hole = randomHole();
+            const cupid = hole.querySelector('.whack-cupid');
+            const randomCupid = cupids[Math.floor(Math.random() * cupids.length)];
+            
+            cupid.textContent = randomCupid;
+            cupid.classList.add('up');
+            
+            const time = Math.random() * 1000 + 500;
+            
+            setTimeout(() => {
+                cupid.classList.remove('up');
+            }, time);
+        }
+
+        function startWhackGame() {
+            whackGameRunning = true;
+            whackScore = 0;
+            whackTimeLeft = 30;
+            document.getElementById('whackScore').textContent = whackScore;
+            document.getElementById('whackTimer').textContent = `Time: ${whackTimeLeft}s`;
+            document.getElementById('whackStartBtn').disabled = true;
+            document.getElementById('whackStartBtn').textContent = 'Playing...';
+            
+            whackInterval = setInterval(popUp, 800);
+            
+            whackTimerInterval = setInterval(() => {
+                whackTimeLeft--;
+                document.getElementById('whackTimer').textContent = `Time: ${whackTimeLeft}s`;
+                
+                if (whackTimeLeft <= 0) {
+                    endWhackGame();
+                }
+            }, 1000);
+        }
+
+        function endWhackGame() {
+            whackGameRunning = false;
+            clearInterval(whackInterval);
+            clearInterval(whackTimerInterval);
+            
+            if (whackScore > whackHighScore) {
+                whackHighScore = whackScore;
+                localStorage.setItem('whackHighScore', whackHighScore);
+                document.getElementById('whackHighScore').textContent = whackHighScore;
+            }
+            
+            document.getElementById('whackStartBtn').disabled = false;
+            document.getElementById('whackStartBtn').textContent = 'Play Again';
+            
+            const cupids = document.querySelectorAll('.whack-cupid');
+            cupids.forEach(cupid => cupid.classList.remove('up'));
+            
+            alert(`Time's up! You hit ${whackScore} cupids! 💘`);
+        }
+
+        // Add click handlers to cupids
+        document.querySelectorAll('.whack-cupid').forEach(cupid => {
+            cupid.addEventListener('click', function(e) {
+                if (!whackGameRunning) return;
+                if (!this.classList.contains('up')) return;
+                
+                e.stopPropagation();
+                
+                const cupidEmoji = this.textContent;
+                if (cupidEmoji === '😈') {
+                    whackScore = Math.max(0, whackScore - 2);
+                } else {
+                    whackScore++;
+                }
+                
+                document.getElementById('whackScore').textContent = whackScore;
+                this.classList.add('hit');
+                this.classList.remove('up');
+                
+                setTimeout(() => {
+                    this.classList.remove('hit');
+                }, 300);
+            });
+        });
+    </script>
+</body>
+</html>
